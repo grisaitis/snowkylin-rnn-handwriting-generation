@@ -16,7 +16,7 @@ with tf.Session() as sess:
     tf.initialize_all_variables().run()
     saver = tf.train.Saver(tf.all_variables())
     for e in range(args.num_epochs):
-        print "epoch %d" % e
+        print("epoch %d" % e)
         data_loader.reset_batch_pointer()
         for b in range(data_loader.num_batches):
             x, y, c_vec, c = data_loader.next_batch()
@@ -34,6 +34,6 @@ with tf.Session() as sess:
             #                feed_dict=feed_dict)
             if b % 100 == 0:
                 loss = sess.run(model.loss, feed_dict=feed_dict)
-                print 'batches %d, loss %g' % (b, loss)
+                print('batches %d, loss %g' % (b, loss))
             sess.run(model.train_op, feed_dict=feed_dict)
         saver.save(sess, 'save_%s/model.tfmodel' % args.mode, global_step=e)
